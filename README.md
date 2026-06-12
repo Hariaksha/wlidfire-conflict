@@ -2,6 +2,9 @@
 
 Research project on the causal effects of wildfire exposure on conflict probability and conflict intensity in Indonesia, with a focus on identifying whether climate-related environmental shocks can meaningfully increase the risk of social unrest and violence.
 
+A draft working paper based on this project is available on Overleaf:  
+[https://www.overleaf.com/read/wmwmpqvgtfvv#38ab4a](https://www.overleaf.com/read/wmwmpqvgtfvv#38ab4a)
+
 This repository organizes the data, analysis notebooks, literature, and presentation materials for an ongoing empirical project using panel data methods, including fixed effects and wind-based instrumental variables approaches.
 
 ---
