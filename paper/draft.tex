@@ -17,7 +17,7 @@
 
 \title{Smoke and Strife: Wind-Instrumented Fire Exposure and Social Conflict in Indonesia}
 \author{Hariaksha Gunda}
-\affil{}
+\affil{The University of Alabama}
 \date{\today}
 
 \begin{document}
@@ -25,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-Seasonal land and forest fires in Indonesia generate severe air pollution (``haze'') that affects tens of millions of people. I examine whether short-run exposure to fire-driven air pollution affects the incidence of social conflict, using a district-month panel covering 447 districts (kabupaten/kota) over 2015--2025. To address the endogeneity of local fire activity, which may itself respond to economic or political conditions, I construct an instrument based on \emph{upwind} fire radiative power: fire activity in locations whose smoke plumes are blown toward a district by prevailing winds, but which are not themselves affected by local conditions. The instrument is a strong predictor of local fire intensity (first-stage $F \approx 4{,}447$). In the full sample, instrumented fire intensity has no detectable effect on conflict events, a result that is robust to a Poisson control-function specification accounting for the extreme zero-inflation of the conflict outcome (82.5\% of district-months record zero events). However, restricting the sample to ``conflict-active'' districts (those with at least one event in 30\% or more of sample months) reveals an economically meaningful and statistically significant \emph{negative} effect of fire intensity on conflict (events: $-0.112$, $p=0.005$; political-violence events: $-0.046$, $p=0.006$). Decomposing by event type shows this effect is concentrated entirely in riots and protests ($-0.046$, $p=0.002$) and is absent for battles and organized violence ($+0.0003$, $p=0.964$), consistent with a mechanism in which severe haze suppresses public gathering and street-level collective action rather than affecting organized armed conflict. By contrast, I find no robust evidence that fire exposure affects conflict-related \emph{fatalities}: linear IV estimates are suggestively negative but imprecise, and the one specification yielding a precisely-estimated effect (a Poisson control function) shows clear signs of residual endogeneity and relies on a severely restricted sample due to the extreme rarity of fatal events.
+Seasonal land and forest fires in Indonesia generate severe air pollution (``haze'') that affects tens of millions of people. I examine whether short-run exposure to fire-driven air pollution affects the incidence of social conflict, using a district-month panel covering 447 districts (kabupaten/kota) over 2015--2025. To address the endogeneity of local fire activity, which may itself respond to economic or political conditions, I construct an instrument based on \emph{upwind} fire radiative power: fire activity in locations whose smoke plumes are blown toward a district by prevailing winds, but which are not themselves affected by local conditions. The instrument is a strong predictor of local fire intensity (first-stage $F \approx 4{,}447$). In the full sample, instrumented fire intensity has no detectable effect on conflict events, a result that is robust to a Poisson control-function specification accounting for the extreme zero-inflation of the conflict outcome (82.5\% of district-months record zero events). However, restricting the sample to ``conflict-active'' districts (those with at least one event in 30\% or more of sample months) reveals an economically meaningful negative effect of fire intensity on conflict (events: $-0.112$, $p=0.005$; political-violence events: $-0.046$, $p=0.006$ under province-clustered standard errors). Decomposing by event type shows this effect is concentrated entirely in riots and protests ($-0.046$, $p=0.002$) and is absent for battles and organized violence ($+0.0003$, $p=0.964$), consistent with a mechanism in which severe haze suppresses public gathering and street-level collective action rather than affecting organized armed conflict. A placebo test, a check for shared regional seasonal cycles, and Conley spatial-correlation standard errors show that the riots/protests result, which carries the paper's central mechanism claim, is robust to all three checks, while the broader all-events and political-violence results in the conflict-active subsample are not: they fall short of conventional significance under Conley standard errors, so I treat them as suggestive rather than conclusive. By contrast, I find no robust evidence that fire exposure affects conflict-related \emph{fatalities}: linear IV estimates are suggestively negative but imprecise, and the one specification yielding a precisely-estimated effect (a Poisson control function) shows clear signs of residual endogeneity and relies on a severely restricted sample due to the extreme rarity of fatal events.
 \end{abstract}
 
 \section{Introduction}
@@ -38,7 +38,7 @@ I construct this instrument at a finer spatial resolution than prior application
 
 My headline finding is a contrast between the full-sample and a conflict-active subsample. In the full panel, instrumented fire intensity (log FRP) has essentially zero effect on conflict counts, a null that survives a Poisson control-function specification designed for severely zero-inflated count data \citep[following][]{lu2023fish}. However, this null masks substantial heterogeneity: in districts where conflict is not a rare event (defined as districts with conflict activity in at least 30\% of sample months), a one-log-point increase in local fire intensity reduces conflict events by 0.11 events per district-month ($p=0.005$) and political-violence events by 0.046 ($p=0.006$). Splitting this restricted-sample effect by ACLED event category shows the entire effect operates through riots and protests ($-0.046$, $p=0.002$), with no detectable effect on battles or organized violence ($p=0.964$). I interpret this pattern as consistent with a \emph{disruption} mechanism: severe haze deters the outdoor gatherings that riots and protests require, while it does not meaningfully affect the planning and execution of organized armed confrontations.
 
-The remainder of the paper proceeds as follows. Section~\ref{sec:data} describes the data and panel construction. Section~\ref{sec:preliminary} reports preliminary, non-instrumented correlational evidence and motivates the IV design. Section~\ref{sec:empirical} describes the instrument and empirical strategy. Section~\ref{sec:results} presents results, including the full-sample null, the conflict-active heterogeneity analysis, the event-type decomposition, and the Poisson robustness check. Section~\ref{sec:discussion} discusses interpretation and limitations, Section~\ref{sec:future} outlines future research directions, and Section~\ref{sec:conclusion} concludes.
+The remainder of the paper proceeds as follows. Section~\ref{sec:data} describes the data and panel construction. Section~\ref{sec:preliminary} reports preliminary, non-instrumented correlational evidence and motivates the IV design. Section~\ref{sec:empirical} describes the instrument and empirical strategy. Section~\ref{sec:results} presents results, including the full-sample null, the conflict-active heterogeneity analysis, the event-type decomposition, the Poisson robustness check, the fatalities analysis, and a placebo test, shared-seasonality check, and Conley spatial-correlation standard errors for the exclusion restriction and inference. Section~\ref{sec:discussion} discusses interpretation and limitations, Section~\ref{sec:future} outlines future research directions, and Section~\ref{sec:conclusion} concludes.
 
 \section{Data}
 \label{sec:data}
@@ -99,6 +99,7 @@ Table~\ref{tab:prelim} summarizes five such specifications. The first models a p
 \centering
 \caption{Preliminary Poisson FE models, uninstrumented fire intensity}
 \label{tab:prelim}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
 \toprule
 Specification & Unit & Outcome & Regressor & Coef. (contemp.) & $p$-value \\
@@ -109,7 +110,8 @@ Kabupaten-week        & district $\times$ week  & events        & log FRP       
 Kecamatan-week        & sub-district $\times$ week & events    & log FRP          & $\approx 0.0000$ & $1.000$ \\
 Equal-area grid-week  & $1^\circ$ cell $\times$ week & events  & log FRP          & $-0.0119$ & $0.187$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \begin{minipage}{0.95\textwidth}
 \vspace{4pt}
 \footnotesize \emph{Notes:} All models include unit and time fixed effects and cluster-robust standard errors; the kabupaten-, kecamatan-, and grid-week specifications additionally include 16 weekly lags of log FRP (not shown). No instrumentation for fire intensity is used in any specification. ``Contemp.'' refers to the coefficient on the contemporaneous fire-intensity regressor.
@@ -243,7 +245,7 @@ $\geq 30\%$ & 86  & 10{,}750 & 50.3\% & $-0.1117^{***}$ (0.0369) & $-0.0458^{***
 \end{minipage}
 \end{table}
 
-A clear pattern emerges: as the sample is restricted to progressively more conflict-active districts, the point estimate becomes more negative and more precisely estimated, becoming statistically significant at conventional levels for $\tau \geq 20\%$ and highly significant at $\tau \geq 30\%$. At the strictest threshold (86 of the 447 districts, with the remaining 361 districts dropped, have conflict activity in at least 30\% of months\footnote{The 86 retained districts are concentrated in a handful of provinces: Jawa Timur (14 districts), Papua (12), Jawa Barat (11), Jakarta Raya (5), and Jawa Tengah (4) account for 46 of the 86; the remaining 40 districts are spread across 28 other provinces, with 1--3 districts each.}), a one-log-point increase in local fire intensity is associated with a reduction of 0.112 conflict events and 0.046 political-violence events per district-month, economically large effects relative to the conditional mean of conflict in these more active districts. The first-stage instrument remains very strong throughout ($F \geq 508$), so this pattern is not an artifact of weakening instrument power in smaller subsamples. The code implementing this robustness analysis can be found at \href{https://github.com/Hariaksha/climate-conflict/blob/main/analysis/wind-IV.ipynb}{this link}.
+A clear pattern emerges: as the sample is restricted to progressively more conflict-active districts, the point estimate becomes more negative and more precisely estimated, becoming statistically significant at conventional levels for $\tau \geq 20\%$ and highly significant at $\tau \geq 30\%$. At the strictest threshold (86 of the 447 districts, with the remaining 361 districts dropped, have conflict activity in at least 30\% of months\footnote{The 86 retained districts are concentrated in a handful of provinces: Jawa Timur (14 districts), Papua (12), Jawa Barat (11), Jakarta Raya (5), and Jawa Tengah (4) account for 46 of the 86; the remaining 40 districts are spread across 28 other provinces, with 1--3 districts each.}), a one-log-point increase in local fire intensity is associated with a reduction of 0.112 conflict events and 0.046 political-violence events per district-month, economically large effects relative to the conditional mean of conflict in these more active districts. The first-stage instrument remains very strong throughout ($F \geq 508$), so this pattern is not an artifact of weakening instrument power in smaller subsamples. The code implementing this robustness analysis can be found at \href{https://github.com/Hariaksha/climate-conflict/blob/main/analysis/wind-IV.ipynb}{this link}.\footnote{This is the primary specification reported throughout the paper. Section~\ref{sec:robustness} shows that the all-events estimate at this threshold loses statistical significance under an additional province $\times$ calendar-month fixed effect controlling for shared regional seasonal fire cycles, and that both the all-events and political-violence estimates fall short of conventional significance under Conley spatial-correlation standard errors, though the point estimates are essentially unchanged under both checks. The riots/protests-specific result in Table~\ref{tab:eventtype} is robust to both checks. See Section~\ref{sec:robustness} for details.}
 
 Because the 86-district subsample is selected on the conflict outcome itself, the resulting estimate should be interpreted as a \emph{local} effect specific to districts where conflict is a recurring phenomenon, not as the population-average effect of fire exposure on conflict in Indonesia (which Table~\ref{tab:mainiv} shows to be null). The monotonic strengthening of the effect across all four thresholds, rather than significance appearing only at one arbitrarily chosen cutoff, supports interpreting this as a genuine gradient rather than a artifact of a single specification search.
 
@@ -329,6 +331,7 @@ The outcomes considered so far (\texttt{events}, \texttt{pv\_events}) measure co
 \centering
 \caption{Fatalities: IV estimates across specifications}
 \label{tab:fatalities}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lccc}
 \toprule
 Specification & $\text{logFRP}_{dt}$ & $\hat{v}_{dt}$ & Observations \\
@@ -338,7 +341,8 @@ Full panel, contemporaneous (IV-6)       & $-0.0135$ (0.0097) [$p=0.176$] & -- &
 Conflict-active, $\tau \geq 30\%$         & $-0.1632$ (0.1124) [$p=0.156$] & -- & 10{,}750 \\
 Poisson IV control function (full panel) & $-0.6360^{***}$ (0.0489) [$p<0.001$] & $+0.5277^{***}$ (0.0491) [$p<0.001$] & 20{,}496 \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \begin{minipage}{0.95\textwidth}
 \vspace{4pt}
 \footnotesize \emph{Notes:} ``Full panel, distributed lags'' and ``contemporaneous'' mirror IV-1/IV-3 in Table~\ref{tab:mainiv} but with \texttt{fatalities} as the outcome. ``Conflict-active'' mirrors the $\tau \geq 30\%$ row of Table~\ref{tab:active}. The Poisson IV control function mirrors Table~\ref{tab:poisson}; its observation count is far lower because \texttt{fepois} drops district $\times$ year-month fixed-effect groups with no within-group variation in \texttt{fatalities}, which are extremely common given 98.9\% zeros. Standard errors clustered by province in parentheses (Poisson model uses iid SEs). $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
@@ -351,14 +355,98 @@ The Poisson IV control function tells a different, and more cautionary, story. B
 
 Taken together, I do not find robust evidence that wildfire exposure causally affects conflict-related fatalities: the linear IV estimates are suggestively negative but imprecise, and the one specification that returns a large, precisely-estimated effect (Poisson IV control function) shows clear signs of residual endogeneity and a severely restricted, non-representative sample. This is itself an informative null: it suggests that the disruption-of-assembly mechanism identified in Section~\ref{sec:eventtype} operates primarily on the \emph{occurrence} of low-fatality events such as riots and protests, rather than on the occurrence or severity of lethal violence, consistent with the event-type decomposition, where the effect was concentrated in riots/protests and absent for battles and organized violence. A clean test of effects on fatalities would likely require a longer panel or a coarser unit of aggregation to overcome the extreme rarity of fatal events.
 
+\subsection{Exclusion-restriction checks: a placebo test and a shared-seasonality test}
+\label{sec:robustness}
+
+The upwind instrument's validity rests on an exclusion restriction: upwind fire activity should affect a district's conflict outcomes only through its effect on that district's own local fire/haze exposure, not through some other channel. I implement two checks of this assumption. The code for both is available at \href{https://github.com/Hariaksha/climate-conflict/blob/main/analysis/wind-IV.ipynb}{this link}.
+
+\paragraph{Placebo test: instrument assigned from a distant, non-adjacent district.} Each district is randomly paired with a ``placebo partner'' district located at least 500\,km away, well beyond the 300\,km upwind search radius used to construct the real instrument, and that partner's upwind-instrument series is substituted in as a placebo regressor. Smoke from a randomly-assigned district roughly 1{,}800\,km away on average (range 507--4{,}917\,km) has no physical transport channel to the focal district, so if the exclusion restriction holds, this placebo instrument should show no relationship with the focal district's conflict outcomes. Table~\ref{tab:placebo} reports reduced-form regressions of conflict on the real and placebo instruments in the $\tau \geq 30\%$ conflict-active subsample, where the real effect is significant.
+
+\begin{table}[H]
+\centering
+\caption{Placebo test: real vs.\ distant-district instrument, $\tau \geq 30\%$ conflict-active sample}
+\label{tab:placebo}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+ & events & pv\_events \\
+\midrule
+Real upwind instrument     & $-0.0230^{***}$ (0.0062) [$p=0.001$] & $-0.0095^{**}$ (0.0036) [$p=0.013$] \\
+Placebo (distant) instrument & $+0.0200$ (0.0130) [$p=0.134$] & $+0.0026$ (0.0034) [$p=0.456$] \\
+\bottomrule
+\end{tabular}%
+}
+\begin{minipage}{0.95\textwidth}
+\vspace{4pt}
+\footnotesize \emph{Notes:} ``Real upwind instrument'' regresses the outcome on $\text{logZ}_{dt}$ and its one-month lag for the focal district. ``Placebo (distant) instrument'' substitutes the corresponding series from a randomly-assigned partner district at least 500\,km away. Both rows include district and year-month fixed effects; standard errors clustered by province. $N=10{,}750$ in both rows. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\end{minipage}
+\end{table}
+
+The contrast is sharp: the real instrument reproduces the negative, statistically significant relationship documented in Section~\ref{sec:active}, while the placebo instrument is small, wrong-signed (positive), and statistically insignificant for both outcomes. Consistent with this, the placebo instrument is also a far weaker predictor of the focal district's own fire intensity (first-stage $F \approx 3.5$) than the real instrument is at the same threshold ($F \approx 508$, Table~\ref{tab:active}). This supports the claim that the effect identified in Section~\ref{sec:active} is specifically attributable to wind-transported smoke from genuinely upwind locations, rather than to some spurious correlation that any sufficiently large fire signal elsewhere in the country would produce.
+
+\paragraph{Shared regional seasonal cycles.} A subtler threat to the exclusion restriction is that upwind and downwind districts may share a common seasonal land-use calendar, for example a province-wide dry-season agricultural-burning cycle, so that the upwind instrument could partly be picking up regional seasonality rather than purely exogenous, wind-driven smoke transport. The year-month fixed effects in the main specification absorb national-level seasonality, but not seasonality specific to a province that recurs at the same calendar month every year. I add a province $\times$ calendar-month fixed effect to both stages, which absorbs any province-specific seasonal cycle shared by upwind and downwind districts within that province. Roughly 47\% of the variance in the raw upwind instrument is explained by province $\times$ calendar-month fixed effects alone, confirming that fire activity is, unsurprisingly, seasonal and regional; the remaining 53\% is the idiosyncratic, month-to-month wind-direction variation the design relies on for identification. Table~\ref{tab:seasonal} reports the second-stage estimates with this additional fixed effect.
+
+\begin{table}[H]
+\centering
+\caption{Robustness to province $\times$ calendar-month fixed effects}
+\label{tab:seasonal}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{Full panel} & \multicolumn{2}{c}{$\tau \geq 30\%$ conflict-active} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & events & pv\_events & events & pv\_events \\
+\midrule
+$\text{logFRP}_{dt}$ & $+0.0135$ (0.0124) & $-0.0036$ (0.0035) & $-0.1077$ (0.0797) & $-0.0864^{***}$ (0.0228) \\
+                       & [$p=0.282$] & [$p=0.311$] & [$p=0.186$] & [$p<0.001$] \\
+\midrule
+Observations           & 55{,}875 & 55{,}875 & 10{,}750 & 10{,}750 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{minipage}{0.95\textwidth}
+\vspace{4pt}
+\footnotesize \emph{Notes:} All specifications add a province $\times$ calendar-month fixed effect to the district and year-month fixed effects used elsewhere in the paper. First-stage $F$ with this added fixed effect is 1{,}978 (full panel), down from 4{,}447 in the baseline specification (Table~\ref{tab:firststage}) but still far above conventional weak-instrument thresholds. Standard errors clustered by province in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\end{minipage}
+\end{table}
+
+The instrument retains substantial relevance after absorbing province-level seasonality ($F \approx 1{,}978$). The $\tau \geq 30\%$ conflict-active result for \texttt{pv\_events} is essentially unchanged, and if anything slightly larger ($-0.086$ vs.\ $-0.046$ at baseline) and remains highly significant. The \texttt{events} result, however, is more sensitive to this specification: the point estimate is similar in sign and magnitude to the baseline ($-0.108$ vs.\ $-0.112$), but loses statistical significance ($p=0.186$ vs.\ $p=0.005$ at baseline). I read this honestly as a genuine, if partial, qualification rather than a result to explain away: part of the baseline \texttt{events} effect may co-move with province-level seasonal fire activity that the year-month fixed effects alone do not fully absorb, whereas the political-violence-specific result is robust to this stricter specification. Taken together with the placebo test above, these checks support the core finding -- the heterogeneous, riot/protest-concentrated effect documented in Sections~\ref{sec:active}--\ref{sec:eventtype} is not an artifact of a weak exclusion restriction, though the precision of the all-events result in particular should be read with this caveat in mind.
+
+\paragraph{Conley spatial-correlation standard errors.} The province-clustered standard errors used throughout this paper allow for arbitrary correlation \emph{within} a province but assume independence \emph{across} provinces. Since the upwind instrument is built from smoothly-varying wind fields, residual spatial correlation between geographically close districts in different provinces is plausible and would not be captured by province clustering. I therefore also compute Conley \citep{conley1999} spatial-HAC standard errors, which allow residual correlation between any two districts within a chosen distance cutoff regardless of province, for the same month. \texttt{pyfixest} does not implement Conley standard errors for IV models, so I implement the estimator directly as a two-way-demeaned 2SLS/GMM sandwich, with the spatial-HAC ``meat'' computed using a uniform kernel over the cutoff distance; only cross-sectional, same-month spatial correlation is modeled, since the year-month fixed effects already absorb common time trends. As a validation check, this estimator exactly reproduces the point estimates reported in Tables~\ref{tab:active} and~\ref{tab:eventtype}, and its province-clustered standard errors are within rounding of \texttt{pyfixest}'s reported CRV1 standard errors (e.g., 0.0361 vs.\ 0.0369 for the \texttt{events} coefficient at $\tau \geq 30\%$, the small remaining gap attributable to finite-sample degrees-of-freedom corrections). Table~\ref{tab:conley} reports Conley standard errors at three distance cutoffs (100, 200, and 400\,km) for both headline result tables.
+
+\begin{table}[H]
+\centering
+\caption{Conley spatial-correlation standard errors, $\tau \geq 30\%$ conflict-active sample}
+\label{tab:conley}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Outcome & Coef.\ ($\text{logFRP}_{dt}$) & Cluster SE (province) & \multicolumn{3}{c}{Conley SE by cutoff} \\
+ & & & 100\,km & 200\,km & 400\,km \\
+\midrule
+events             & $-0.1117$ & 0.0369 [$p=0.005$] & 0.0637 [$p=0.079$] & 0.0643 [$p=0.083$] & 0.0647 [$p=0.085$] \\
+pv\_events         & $-0.0458$ & 0.0156 [$p=0.006$] & 0.0291 [$p=0.115$] & 0.0301 [$p=0.127$] & 0.0305 [$p=0.133$] \\
+riots\_protests    & $-0.0462$ & 0.0134 [$p=0.002$] & 0.0192 [$p=0.016$] & 0.0188 [$p=0.014$] & 0.0188 [$p=0.014$] \\
+battles\_violence  & $+0.0003$ & 0.0068 [$p=0.964$] & 0.0162 [$p=0.985$] & 0.0172 [$p=0.986$] & 0.0172 [$p=0.986$] \\
+\bottomrule
+\end{tabular}%
+}
+\begin{minipage}{0.95\textwidth}
+\vspace{4pt}
+\footnotesize \emph{Notes:} Coefficients are identical across columns by construction (Conley correction affects only standard errors, not point estimates). ``events'' and ``pv\_events'' rows correspond to Table~\ref{tab:active}, $\tau \geq 30\%$; ``riots\_protests'' and ``battles\_violence'' rows correspond to Table~\ref{tab:eventtype}. $p$-values computed from a normal approximation. $N = 10{,}750$ for all rows.
+\end{minipage}
+\end{table}
+
+Conley standard errors are uniformly larger than the province-clustered standard errors, by roughly a factor of 1.7--2, consistent with genuine residual spatial correlation that crosses province boundaries and that province clustering alone does not capture. The consequences for inference differ sharply by outcome. The all-events and political-violence results in Table~\ref{tab:active} both fall just short of the conventional 5\% threshold under Conley standard errors ($p=0.08$ and $p=0.13$ at the 200\,km cutoff, respectively), so I no longer regard those two results as robust to this stricter, and arguably more appropriate, treatment of spatial dependence. The riots/protests result in Table~\ref{tab:eventtype}, however, remains significant at the 5\% level under every cutoff considered ($p \approx 0.014$--$0.016$), and the null result for battles/violence remains a precise zero throughout. Because the riots/protests result is also the one carrying the paper's central mechanism claim (Section~\ref{sec:eventtype}), this is the most important result to have survived the stricter inference; the broader \texttt{events} and \texttt{pv\_events} results in Table~\ref{tab:active} should now be read as suggestive rather than conclusively significant, and I revise the headline framing in Section~\ref{sec:discussion} accordingly.
+
 \section{Discussion}
 \label{sec:discussion}
 
-Three results emerge from this analysis. First, the upwind-fire instrument is extremely strong (first-stage $F \approx 4{,}447$), confirming that the design has ample power to detect effects of fire-driven exposure on local fire intensity and, through it, on downstream outcomes, if such effects exist. Second, despite this power, the \emph{average} effect of fire intensity on conflict across the full population of 447 districts is null, and this null is robust across linear IV and Poisson IV control-function specifications. Third, this average null masks substantial heterogeneity: among the subset of districts where conflict is not a rare event, fire intensity has a sizeable, statistically significant \emph{negative} effect on conflict, driven entirely by riots and protests rather than organized violence.
+Four results emerge from this analysis. First, the upwind-fire instrument is extremely strong (first-stage $F \approx 4{,}447$), confirming that the design has ample power to detect effects of fire-driven exposure on local fire intensity and, through it, on downstream outcomes, if such effects exist. Second, despite this power, the \emph{average} effect of fire intensity on conflict across the full population of 447 districts is null, and this null is robust across linear IV and Poisson IV control-function specifications. Third, this average null masks heterogeneity: among the subset of districts where conflict is not a rare event, fire intensity has a sizeable, negative effect on conflict and on political violence specifically, driven entirely by riots and protests rather than organized violence. Fourth, and importantly, the strength of this evidence varies by outcome once spatial correlation in the errors is accounted for: the riots/protests result is robust to Conley standard errors and to an added province $\times$ calendar-month fixed effect (Section~\ref{sec:robustness}), while the broader all-events and political-violence-event results in Table~\ref{tab:active} are not -- they fall short of conventional significance under Conley standard errors, and the all-events result loses significance under the added seasonal fixed effect. I therefore treat the riots/protests-specific finding as the paper's most defensible result, with the broader conflict-active heterogeneity in Table~\ref{tab:active} as suggestive but less conclusive evidence of the same underlying pattern.
 
 \paragraph{Interpretation.} The pattern documented here is, I argue, most consistent with a \emph{disruption-of-collective-action} mechanism: haze suppresses the public gatherings that riots and protests require, without affecting the planning or conduct of organized armed violence. This is the opposite sign from much of the climate-conflict literature, which typically finds that adverse environmental shocks \emph{increase} conflict through resource scarcity or income-shock channels \citep{hsiang2013quantifying}. The contrast may reflect the very different time horizon and mechanism at play: fire-driven haze is an acute, short-duration shock operating through immediate behavioral and logistical channels (people cannot or do not want to go outside), rather than a persistent shock to income or resource availability that might generate grievance-based conflict over a longer horizon.
 
-\paragraph{Caveats and next steps.} Several issues merit further attention in the next draft. First, the conflict-active sample restriction raises an external-validity question: the documented effect applies to the subpopulation of districts where conflict is already a recurring phenomenon, and Section~\ref{sec:active} should be explicitly framed as a heterogeneity/local-effect analysis rather than a population-average effect, with the full-sample null in Table~\ref{tab:mainiv} as the headline specification. Second, while the upwind instrument is designed to be exogenous to local conditions by construction, it remains worth probing whether upwind fire activity is correlated with other upwind-region characteristics that could independently affect the downwind district (e.g., shared seasonal agricultural cycles). Third, an explicit placebo/falsification exercise, for example testing whether the upwind instrument predicts conflict in \emph{non-adjacent} or implausibly distant districts, would strengthen the exclusion-restriction argument. Finally, a spatially-correlated-errors specification (e.g., Conley standard errors, as in \citealp{lu2023fish}) alongside the province-clustered standard errors used here would help assess the sensitivity of the significance levels in Tables~\ref{tab:active} and~\ref{tab:eventtype} to the precise treatment of spatial dependence.
+\paragraph{Caveats and next steps.} Several issues merit further attention in the next draft. First, the conflict-active sample restriction raises an external-validity question: the documented effect applies to the subpopulation of districts where conflict is already a recurring phenomenon, and Section~\ref{sec:active} should be explicitly framed as a heterogeneity/local-effect analysis rather than a population-average effect, with the full-sample null in Table~\ref{tab:mainiv} as the headline specification. Second, the placebo test in Section~\ref{sec:robustness} supports the exclusion restriction, but the shared-seasonality and Conley standard-error checks in the same section both show that the all-events and political-violence results in Table~\ref{tab:active} are less robust than the baseline specification suggests: \texttt{events} loses significance under the added province $\times$ calendar-month fixed effect, and both \texttt{events} and \texttt{pv\_events} fall short of conventional significance under Conley standard errors. The riots/protests result in Table~\ref{tab:eventtype}, which carries the paper's central mechanism claim, is robust to both checks. This sensitivity should be reported alongside the headline estimates rather than omitted, and the next draft should lead with the riots/protests result as the most defensible specific finding, with the broader event-count results in Table~\ref{tab:active} presented as suggestive rather than conclusively significant.
 
 \section{Future Research Directions}
 \label{sec:future}
@@ -382,8 +470,24 @@ This paper opens several avenues for future work, beyond the immediate robustnes
 
 Using a novel district-month panel for Indonesia and an instrument based on the physical transport of wildfire smoke, I find no average effect of fire-driven pollution exposure on social conflict, but a robust and economically meaningful negative effect among conflict-active districts, concentrated in riots and protests. These results suggest that short-run environmental shocks can affect conflict not only by altering incentives for violence, but by mechanically disrupting the public assembly that non-violent and low-level violent contention requires.
 
+\section*{Data Availability Statement}
+
+All analysis code, including the panel-construction, instrument-construction, and estimation notebooks described throughout this paper, is available at \href{https://github.com/Hariaksha/climate-conflict}{github.com/Hariaksha/climate-conflict}. The conflict data (ACLED) and the processed wind data (ERA5) used in this paper are also hosted in that repository. The two largest raw inputs, fire detections and administrative boundaries, exceed standard GitHub file-size limits and are instead available directly from their original public sources:
+\begin{itemize}
+    \item \textbf{Fire detections:} NASA VIIRS active fire products (Suomi-NPP and NOAA-20/J1, 375\,m resolution), available via NASA FIRMS at \url{https://firms.modaps.eosdis.nasa.gov/download/}.
+    \item \textbf{Administrative boundaries:} GADM v4.1 Indonesia boundaries (Level 2, kabupaten/kota), available at \url{https://gadm.org/download_country.html}.
+    \item \textbf{Conflict events:} ACLED Indonesia data, available with registration at \url{https://acleddata.com}.
+    \item \textbf{Wind fields:} ERA5 hourly reanalysis on single levels, available via the Copernicus Climate Data Store at \url{https://cds.climate.copernicus.eu}.
+\end{itemize}
+Replication of the full pipeline, from raw downloads through the figures and tables in this paper, requires retrieving the fire and boundary data from the sources above and placing them in the directory structure expected by the notebooks in the repository (documented in the repository's README).
+
 % ---------- Bibliography ----------
 \begin{thebibliography}{99}
+
+\bibitem[Conley(1999)]{conley1999}
+Conley, T.~G. (1999).
+\newblock GMM estimation with cross sectional dependence.
+\newblock \emph{Journal of Econometrics}, 92(1), 1--45.
 
 \bibitem[Hsiang et al.(2013)]{hsiang2013quantifying}
 Hsiang, S.~M., Burke, M., and Miguel, E. (2013).
