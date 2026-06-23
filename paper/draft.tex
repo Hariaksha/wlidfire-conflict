@@ -88,6 +88,24 @@ pv\_events (political violence) & 0.062 & 0.406 & 95.8\% & 55{,}875 \\
 \end{minipage}
 \end{table}
 
+\subsection{Geographic distribution}
+
+Figures~\ref{fig:conflictmap} and~\ref{fig:firemap} map the raw conflict and fire data underlying the panel. Conflict events are concentrated in Java, Sumatra, and Papua, while fire activity is concentrated in the peatland and forest regions of Sumatra, Kalimantan, and Papua -- areas that are spatially distinct from, but geographically adjacent to, the most conflict-active districts, consistent with the smoke-transport mechanism the upwind instrument is designed to exploit.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/conflict_events_map.png}
+\caption{ACLED conflict events in Indonesia, February 2015--June 2025 ($n=21{,}653$).}
+\label{fig:conflictmap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/wildfire_events_map.png}
+\caption{VIIRS wildfire detections in Indonesia, February 2015--June 2025 ($n=2{,}036{,}003$; vegetation fires only, type=0, confidence h/n). Color indicates $\log(1+\text{FRP})$.}
+\label{fig:firemap}
+\end{figure}
+
 \section{Preliminary Evidence: Correlational Poisson Models}
 \label{sec:preliminary}
 
@@ -482,38 +500,7 @@ All analysis code, including the panel-construction, instrument-construction, an
 Replication of the full pipeline, from raw downloads through the figures and tables in this paper, requires retrieving the fire and boundary data from the sources above and placing them in the directory structure expected by the notebooks in the repository (documented in the repository's README).
 
 % ---------- Bibliography ----------
-\begin{thebibliography}{99}
-
-\bibitem[Conley(1999)]{conley1999}
-Conley, T.~G. (1999).
-\newblock GMM estimation with cross sectional dependence.
-\newblock \emph{Journal of Econometrics}, 92(1), 1--45.
-
-\bibitem[Hsiang et al.(2013)]{hsiang2013quantifying}
-Hsiang, S.~M., Burke, M., and Miguel, E. (2013).
-\newblock Quantifying the influence of climate on human conflict.
-\newblock \emph{Science}, 341(6151), 1235367.
-
-\bibitem[Lu and Yamazaki(2023)]{lu2023fish}
-Lu, J. and Yamazaki, S. (2023).
-\newblock Fish to fight: Climate, marine resources, and conflict.
-\newblock \emph{World Development}.
-
-\bibitem[Montiel Olea and Pflueger(2013)]{montielolea2013}
-Montiel Olea, J.~L. and Pflueger, C. (2013).
-\newblock A robust test for weak instruments.
-\newblock \emph{Journal of Business \& Economic Statistics}, 31(3), 358--369.
-
-\bibitem[Stock and Yogo(2005)]{stockyogo2005}
-Stock, J.~H. and Yogo, M. (2005).
-\newblock Testing for weak instruments in linear IV regression.
-\newblock In \emph{Identification and Inference for Econometric Models}, 80--108.
-
-\bibitem[Wooldridge(2010)]{wooldridge2010}
-Wooldridge, J.~M. (2010).
-\newblock \emph{Econometric Analysis of Cross Section and Panel Data}.
-\newblock MIT Press, 2nd edition.
-
-\end{thebibliography}
+\bibliographystyle{plainnat}
+\bibliography{references}
 
 \end{document}
