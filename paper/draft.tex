@@ -158,7 +158,7 @@ The first-stage regression is
 \text{logFRP}_{dt} = \alpha_d + \gamma_t + \delta_0\, \text{logZ}_{dt} + \delta_1\, \text{logZ}_{d,t-1} + \eta_{dt},
 \label{eq:firststage}
 \end{equation}
-where $\alpha_d$ and $\gamma_t$ are district and year-month fixed effects, and standard errors are clustered at the province level (38 provinces) to account for spatial correlation in wind patterns within province. Table~\ref{tab:firststage} reports the results. Both the contemporaneous and one-month-lagged upwind instrument are strong, positive predictors of local fire intensity, with an implied first-stage $F$-statistic of approximately 4{,}447, far exceeding the conventional threshold of 10 and the \citet{stockyogo2005} / \citet{montielolea2013} 5\%-worst-case-bias threshold of 104.7.
+where $\alpha_d$ and $\gamma_t$ are district and year-month fixed effects, and standard errors are clustered at the province level (38 provinces) to account for spatial correlation in wind patterns within province. Table~\ref{tab:firststage} reports the results. Both the contemporaneous and one-month-lagged upwind instrument are strong, positive predictors of local fire intensity, with an implied first-stage $F$-statistic of approximately 4{,}447, far exceeding the conventional \citet{staigerstock1997} threshold of 10 and the \citet{montielolea2013} 5\%-worst-case-bias threshold of 104.7.
 
 \begin{table}[H]
 \centering
@@ -300,7 +300,7 @@ The negative effect identified in Table~\ref{tab:active} is concentrated entirel
 \subsection{Robustness: Poisson IV control function}
 \label{sec:poisson}
 
-As a final robustness check on the full-sample null (Table~\ref{tab:mainiv}), I consider whether the linear IV specification is simply ill-suited to the severely zero-inflated count outcomes. Following \citet{lu2023fish}, who study a similarly zero-inflated count outcome (conflict events in $1^{\circ}\times1^{\circ}$ ocean grid cells, 90\% zeros) and find that a Poisson IV control-function approach \citep{wooldridge2010} recovers economically meaningful effects that a linear IV does not, I implement the analogous two-step procedure on the full district panel:
+As a final robustness check on the full-sample null (Table~\ref{tab:mainiv}), I consider whether the linear IV specification is simply ill-suited to the severely zero-inflated count outcomes. Following \citet{lu2023fish}, who study a similarly zero-inflated count outcome (conflict events in $1^{\circ}\times1^{\circ}$ ocean grid cells, 90\% zeros) and find that a Poisson IV control-function approach \citep{terzabasurathouz2008} recovers economically meaningful effects that a linear IV does not, I implement the analogous two-step procedure on the full district panel:
 
 \begin{enumerate}
     \item \textbf{Stage 1:} Estimate the linear first-stage IV (Eq.~\eqref{eq:firststage}) and compute the residual $\hat{v}_{dt} = \text{logFRP}_{dt} - \widehat{\text{logFRP}}_{dt}$.
