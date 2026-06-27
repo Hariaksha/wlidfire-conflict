@@ -16,10 +16,12 @@ Local fire activity is plausibly endogenous to local conflict: land disputes, we
 
 ## Headline Findings
 
-- In the **full sample** (447 districts, Feb. 2015–Jun. 2025), instrumented fire intensity has **no detectable average effect** on conflict event counts, robust to a Poisson IV control-function specification.
-- In **conflict-active districts** (those with conflict in ≥30% of sample months), fire intensity has an economically meaningful **negative** effect on conflict events and political-violence events.
-- An **event-type decomposition** shows this negative effect is concentrated entirely in **riots and protests**, and is a precise zero for battles and organized violence, consistent with a mechanism in which severe haze disrupts public gathering and street-level collective action rather than organized armed conflict.
-- This riots/protests-specific result is the one finding that survives every robustness check applied (a placebo test using a randomly-assigned distant district's instrument, a check for shared regional seasonal cycles, and Conley spatial-correlation standard errors); the broader all-events and political-violence results are comparatively more sensitive to these checks.
+- In the **full sample** (447 districts, Feb. 2015–Jun. 2025), instrumented fire intensity has **no detectable average effect** on all-event counts under the baseline specification, robust to a Poisson IV control-function specification. This full-sample null is *not* uniform across outcomes, however: a more rigorous robustness check that fully instruments the distributed-lag structure (see below) reveals a significant negative full-sample effect specifically on political-violence events.
+- In **conflict-active districts** (those with conflict in ≥30% of sample months), fire intensity has an economically meaningful **negative** effect on conflict events and political-violence events. This result is robust to, and if anything strengthens under, fully instrumenting the lag structure.
+- A **two-category event-type decomposition** shows this negative effect is concentrated entirely in a composite **riots/protests** category, and is a precise zero for battles and organized violence, initially suggestive of a mechanism in which severe haze disrupts public gathering and street-level collective action.
+- A **finer, four-category decomposition** into literal ACLED event types complicates this story: **Protests** (the category most directly tied to planned public assembly, and the largest by far) shows **no significant effect**, while the negative effect is instead concentrated in **Riots** and, unexpectedly, **Violence against civilians** (which does not require public assembly in the same sense), alongside a weaker, marginally significant effect on **Strategic developments** that a clean disruption-of-assembly story does not predict. The mechanism is real but narrower, and less well understood, than a simple "haze stops protests" story.
+- The riots/protests result from the two-category decomposition is the one finding that survives every robustness check applied (a placebo test using a randomly-assigned distant district's instrument, a check for shared regional seasonal cycles, Conley spatial-correlation standard errors, and a fully-instrumented distributed-lag specification); the broader all-events and political-violence results are comparatively more sensitive to these checks.
+- Fully instrumenting the one-month lag (rather than leaving it as an uninstrumented control, a constraint of the IV software used) also reveals a new, suggestive pattern: a negative contemporaneous effect followed by a positive, often significant, one-month-lagged effect, consistent with a short-run disruption followed by a partial rebound rather than pure suppression. This is reported as a single robustness check, not an independently validated finding.
 - No robust evidence that fire exposure affects conflict-related **fatalities**.
 
 See [`paper/draft.pdf`](paper/draft.pdf) for the full results, the Related Literature section, and detailed robustness analysis.
@@ -40,9 +42,9 @@ See the Data Availability Statement in the paper for details on reconstructing t
 ## Methodology
 
 - **Upwind instrument:** for each district-month, the total fire radiative power of detections lying upwind of the district within a fixed radius and angular cone defined by that month's wind direction.
-- **Two-stage least squares (IV)** with district and year-month fixed effects, province-clustered standard errors.
-- **Poisson IV control function** (two-stage residual inclusion) to address extreme zero-inflation in the conflict-count outcomes.
-- **Robustness:** conflict-activity-threshold heterogeneity, event-type decomposition, a placebo/falsification test, a province-by-calendar-month seasonal-confound check, and Conley spatial-correlation standard errors.
+- **Two-stage least squares (IV)** with district and year-month fixed effects, province-clustered standard errors. The main distributed-lag specifications instrument only the contemporaneous treatment (a constraint of the `pyfixest` estimator used, which supports a single endogenous regressor); a custom two-way-demeaned GMM/2SLS estimator, validated against `pyfixest`'s output, is used to additionally instrument the lag simultaneously as a robustness check.
+- **Poisson IV control function** (two-stage residual inclusion, following Terza, Basu & Rathouz, 2008) to address extreme zero-inflation in the conflict-count outcomes.
+- **Robustness:** conflict-activity-threshold heterogeneity, a two-way and a four-way event-type decomposition (using both composite and literal individual ACLED categories), a placebo/falsification test, a province-by-calendar-month seasonal-confound check, Conley spatial-correlation standard errors, and a fully-instrumented distributed-lag specification.
 
 ---
 
