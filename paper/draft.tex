@@ -363,7 +363,7 @@ Taken together, these results do not support a mechanism specifically about disr
 As a final robustness check on the full-sample null (Table~\ref{tab:mainiv}), I consider whether the linear IV specification is simply ill-suited to the severely zero-inflated count outcomes. Following \citet{lu2023fish}, who study a similarly zero-inflated count outcome (conflict events in $1^{\circ}\times1^{\circ}$ ocean grid cells, 90\% zeros) and find that a Poisson IV control-function approach \citep{terzabasurathouz2008} recovers economically meaningful effects that a linear IV does not, I implement the analogous two-step procedure on the full district panel:
 
 \begin{enumerate}
-    \item \textbf{Stage 1:} Estimate the linear first-stage IV (Eq.~\eqref{eq:firststage}) and compute the residual $\hat{v}_{dt} = \text{logFRP}_{dt} - \widehat{\text{logFRP}}_{dt}$.
+    \item \textbf{Stage 1:} Regress $\text{logFRP}_{dt}$ on the excluded instruments $(\text{logZ}_{dt}, \text{logZ}_{d,t-1})$ \emph{and} the exogenous lag control $\text{logFRP}_{d,t-1}$, with district and year-month fixed effects, and compute the residual $\hat{v}_{dt} = \text{logFRP}_{dt} - \widehat{\text{logFRP}}_{dt}$. Including the exogenous lag control in the first stage (rather than only the excluded instruments) ensures $\hat{v}_{dt}$ is orthogonal to $\text{logFRP}_{d,t-1}$, as a correctly-specified two-stage residual inclusion estimator requires.
     \item \textbf{Stage 2:} Estimate a Poisson fixed-effects model of the conflict outcome on $\text{logFRP}_{dt}$, $\text{logFRP}_{d,t-1}$, and the control function $\hat{v}_{dt}$, with district and year-month fixed effects. A statistically significant coefficient on $\hat{v}_{dt}$ would indicate that $\text{logFRP}_{dt}$ is endogenous and that the Poisson estimate of its coefficient should be interpreted with caution; an insignificant coefficient indicates limited endogeneity bias.
 \end{enumerate}
 
@@ -377,15 +377,15 @@ The code implementing this control-function procedure can be found at \href{http
 \toprule
  & events & pv\_events \\
 \midrule
-$\text{logFRP}_{dt}$       & $-0.0210$ & $0.0376$ \\
-                            & (0.0143) & (0.0339) \\
-                            & [$p=0.140$] & [$p=0.268$] \\
-$\text{logFRP}_{d,t-1}$    & --       & $-0.0110$ \\
-                            &          & (0.0140) \\
-                            &          & [$p=0.429$] \\
-$\hat{v}_{dt}$ (control function) & $0.0127$ & $-0.0158$ \\
-                            & (0.0144) & (0.0344) \\
-                            & [$p=0.377$] & [$p=0.645$] \\
+$\text{logFRP}_{dt}$       & $-0.0297$ & $-0.0133$ \\
+                            & (0.0183) & (0.0434) \\
+                            & [$p=0.103$] & [$p=0.759$] \\
+$\text{logFRP}_{d,t-1}$    & $0.0045$ & $0.0064$ \\
+                            & (0.0100) & (0.0231) \\
+                            & [$p=0.652$] & [$p=0.780$] \\
+$\hat{v}_{dt}$ (control function) & $0.0219$ & $0.0397$ \\
+                            & (0.0187) & (0.0446) \\
+                            & [$p=0.242$] & [$p=0.374$] \\
 \midrule
 District FE     & Yes & Yes \\
 Year-month FE   & Yes & Yes \\
@@ -394,11 +394,11 @@ Observations     & 55{,}875 & 44{,}500 \\
 \end{tabular}
 \begin{minipage}{0.85\textwidth}
 \vspace{4pt}
-\footnotesize \emph{Notes:} Stage 1 is the linear IV first stage reported in Table~\ref{tab:firststage}; $\hat{v}_{dt}$ is the corresponding residual. Stage 2 is a Poisson fixed-effects regression. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\footnotesize \emph{Notes:} Stage 1 regresses $\text{logFRP}_{dt}$ on the excluded instruments and the exogenous lag control $\text{logFRP}_{d,t-1}$ (with district and year-month fixed effects); $\hat{v}_{dt}$ is the resulting residual. Stage 2 is a Poisson fixed-effects regression. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
 \end{minipage}
 \end{table}
 
-In contrast to \citet{lu2023fish}, the control-function residual $\hat{v}_{dt}$ is statistically insignificant in both the \texttt{events} ($p=0.377$) and \texttt{pv\_events} ($p=0.645$) Poisson models, indicating that endogeneity bias in the full-sample relationship between local fire intensity and conflict is minimal. The Poisson coefficient on $\text{logFRP}_{dt}$ itself also remains statistically insignificant in both outcomes. I therefore conclude that the full-sample null is robust to (i) moving from a linear to a count-data (Poisson) specification, and (ii) explicitly controlling for first-stage endogeneity via the control-function approach. This strengthens the interpretation of the conflict-active heterogeneity in Section~\ref{sec:active} as a genuine feature of the data, a \emph{local} average treatment effect concentrated among districts where conflict is a meaningful, recurring outcome, rather than an artifact of model misspecification in the full sample.
+In contrast to \citet{lu2023fish}, the control-function residual $\hat{v}_{dt}$ is statistically insignificant in both the \texttt{events} ($p=0.242$) and \texttt{pv\_events} ($p=0.374$) Poisson models, indicating that endogeneity bias in the full-sample relationship between local fire intensity and conflict is minimal. The Poisson coefficient on $\text{logFRP}_{dt}$ itself also remains statistically insignificant in both outcomes. I therefore conclude that the full-sample null is robust to (i) moving from a linear to a count-data (Poisson) specification, and (ii) explicitly controlling for first-stage endogeneity via the control-function approach. This strengthens the interpretation of the conflict-active heterogeneity in Section~\ref{sec:active} as a genuine feature of the data, a \emph{local} average treatment effect concentrated among districts where conflict is a meaningful, recurring outcome, rather than an artifact of model misspecification in the full sample.
 
 \subsection{Conflict severity: fatalities}
 \label{sec:fatalities}
@@ -417,7 +417,7 @@ Specification & $\text{logFRP}_{dt}$ & $\hat{v}_{dt}$ & Observations \\
 Full panel, distributed lags (IV-5)      & $-0.0223$ (0.0166) [$p=0.189$] & -- & 55{,}875 \\
 Full panel, contemporaneous (IV-6)       & $-0.0135$ (0.0097) [$p=0.176$] & -- & 55{,}875 \\
 Conflict-active, $\tau \geq 30\%$         & $-0.1632$ (0.1124) [$p=0.156$] & -- & 10{,}750 \\
-Poisson IV control function (full panel) & $-0.6360^{***}$ (0.0489) [$p<0.001$] & $+0.5277^{***}$ (0.0491) [$p<0.001$] & 20{,}496 \\
+Poisson IV control function (full panel) & $-0.8832^{***}$ (0.0599) [$p<0.001$] & $+0.7868^{***}$ (0.0613) [$p<0.001$] & 20{,}496 \\
 \bottomrule
 \end{tabular}%
 }
@@ -429,7 +429,7 @@ Poisson IV control function (full panel) & $-0.6360^{***}$ (0.0489) [$p<0.001$] 
 
 The linear IV estimates for fatalities are qualitatively similar in sign to the \texttt{events} and \texttt{pv\_events} results: negative in all three linear specifications, including the $\tau \geq 30\%$ conflict-active subsample, where the point estimate ($-0.163$) is large relative to the mean, but none reach conventional significance levels ($p \in [0.156, 0.189]$). This is unsurprising given that fatalities are roughly an order of magnitude rarer than events of any kind (98.9\% vs.\ 82.5\% zeros), so the linear IV likely lacks power to detect an effect of similar relative magnitude to the event-count results.
 
-The Poisson IV control function tells a different, and more cautionary, story. Both $\text{logFRP}_{dt}$ ($-0.636$, $p<0.001$) and the control-function residual $\hat{v}_{dt}$ ($+0.528$, $p<0.001$) are highly significant, in sharp contrast to the \texttt{events} and \texttt{pv\_events} Poisson models in Table~\ref{tab:poisson}, where $\hat{v}_{dt}$ was insignificant. A significant $\hat{v}_{dt}$ indicates that $\text{logFRP}_{dt}$ is endogenous with respect to fatalities even after instrumenting, so the Poisson coefficient on $\text{logFRP}_{dt}$ in this specification should \emph{not} be read as a causal estimate. Compounding this, the sample used by \texttt{fepois} drops to 20{,}496 observations (37\% of the full panel), because Poisson's conditional MLE drops any district $\times$ year-month fixed-effect group with no within-group variation in the outcome, which is overwhelmingly common when 98.9\% of observations are zero. This non-random sample restriction further undermines a causal interpretation of the Poisson IV fatalities coefficient.
+The Poisson IV control function tells a different, and more cautionary, story. Both $\text{logFRP}_{dt}$ ($-0.883$, $p<0.001$) and the control-function residual $\hat{v}_{dt}$ ($+0.787$, $p<0.001$) are highly significant, in sharp contrast to the \texttt{events} and \texttt{pv\_events} Poisson models in Table~\ref{tab:poisson}, where $\hat{v}_{dt}$ was insignificant. A significant $\hat{v}_{dt}$ indicates that $\text{logFRP}_{dt}$ is endogenous with respect to fatalities even after instrumenting, so the Poisson coefficient on $\text{logFRP}_{dt}$ in this specification should \emph{not} be read as a causal estimate. Compounding this, the sample used by \texttt{fepois} drops to 20{,}496 observations (37\% of the full panel), because Poisson's conditional MLE drops any district $\times$ year-month fixed-effect group with no within-group variation in the outcome, which is overwhelmingly common when 98.9\% of observations are zero. This non-random sample restriction further undermines a causal interpretation of the Poisson IV fatalities coefficient.
 
 Taken together, I do not find robust evidence that wildfire exposure causally affects conflict-related fatalities: the linear IV estimates are suggestively negative but imprecise, and the one specification that returns a large, precisely-estimated effect (Poisson IV control function) shows clear signs of residual endogeneity and a severely restricted, non-representative sample. This is itself an informative null: it suggests that the effect documented in Sections~\ref{sec:eventtype}--\ref{sec:fourway} operates primarily on the \emph{occurrence} of low-fatality events such as riots, rather than on the occurrence or severity of lethal violence, consistent with the event-type decompositions, where the effect was concentrated in riots and violence against civilians and absent for battles and organized violence. A clean test of effects on fatalities would likely require a longer panel or a coarser unit of aggregation to overcome the extreme rarity of fatal events.
 
