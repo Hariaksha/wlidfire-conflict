@@ -94,4 +94,4 @@ Repository: [https://github.com/Hariaksha/climate-conflict](https://github.com/H
 
 If you use or reference this project, please cite it as an unpublished working paper:
 
-> Gunda, H. *Smoke and Strife: Wind-Instrumented Fire Exposure and Social Conflict in Indonesia.* Working paper, [paper/draft.pdf](paper/draft.pdf).
+> Gunda, H. *Smoke and Strife: Fire Exposure and Social Conflict in Indonesia.* Working paper, [paper/draft.pdf](paper/draft.pdf).
