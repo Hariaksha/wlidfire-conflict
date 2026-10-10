@@ -82,7 +82,7 @@ Wind fields come from ERA5 reanalysis \citep{hersbach2023era5}, providing monthl
 
 \subsection{Conflict}
 
-Conflict event data come from the Armed Conflict Location \& Event Data Project (ACLED) for Indonesia. ACLED's \texttt{admin2} field reports district names using English translations (e.g., ``East Jakarta''), while GADM uses Indonesian district names (e.g., ``Jakarta Timur''). I construct a crosswalk between the two naming systems via (i) direct string matching, (ii) a manual override dictionary for known renames and translation idiosyncrasies (e.g., ``Yogyakarta'' $\to$ ``Kota Yogyakarta''), and (iii) directional-word translation rules (e.g., ``East X'' $\to$ ``X Timur'', ``X Islands'' $\to$ ``Kepulauan X''). This crosswalk successfully matches 449 of 469 ACLED districts, covering 98.6\% of all recorded events (21{,}393 of 21{,}703 events in the ACLED pull); the remaining 20 unmatched districts are predominantly post-2014 \emph{pemekaran} (administrative split) regencies absent from the GADM 4.1 boundary set, and their events are dropped. These 21{,}393 \emph{matched} events (as opposed to \emph{all} recorded events, mapped in Appendix Figure~\ref{fig:conflictmap}) are the basis for the district-month conflict counts used in the regressions and for all event-type shares reported below.
+Conflict event data come from the Armed Conflict Location \& Event Data Project (ACLED) for Indonesia. ACLED's \texttt{admin2} field reports district names using English translations (e.g., ``East Jakarta''), while GADM uses Indonesian district names (e.g., ``Jakarta Timur''). I construct a crosswalk between the two naming systems via (i) direct string matching, (ii) a manual override dictionary for known renames and translation idiosyncrasies (e.g., ``Yogyakarta'' $\to$ ``Kota Yogyakarta''), and (iii) directional-word translation rules (e.g., ``East X'' $\to$ ``X Timur'', ``X Islands'' $\to$ ``Kepulauan X''). This crosswalk matches 449 of the 469 district names in ACLED. The ACLED extract runs from 1 January 2015 to 10 June 2025; the analysis window begins in February 2015 because the first month is lost to the one-month lag. Of the 21{,}653 events ACLED records in this window, 21{,}347 (98.6\%) are matched to a district. The 306 dropped events comprise 126 in 14 regencies created by administrative splits (\emph{pemekaran}) that are absent from the GADM 4.1 boundary set, 120 with no district recorded in ACLED (113 of them in Jakarta), and 60 in six districts that exist in GADM under a different spelling but are missed by the crosswalk (e.g., Binjai, Tanjung Balai, Banjar). These 21{,}347 \emph{matched} events (as opposed to \emph{all} recorded events, mapped in Appendix Figure~\ref{fig:conflictmap}) are the basis for the district-month conflict counts used in the regressions and for all event-type shares reported below.
 
 I construct two outcome variables at the district-month level:
 \begin{itemize}
@@ -232,7 +232,7 @@ Because the 86-district subsample is selected on the conflict outcome itself, th
 \subsection{Event-type decomposition}
 \label{sec:eventtype}
 
-To distinguish between possible mechanisms underlying the negative effect in conflict-active districts, I decompose the $\tau \geq 30\%$ sample's conflict outcome by ACLED event type into \textbf{Riots/VAC} (13.1\% of all matched events) and \textbf{Battles/Explosions} (3.3\% of all matched events), and re-estimate the IV specification for each category. Table~\ref{tab:eventtype} reports the results.
+To distinguish between possible mechanisms underlying the negative effect in conflict-active districts, I decompose the $\tau \geq 30\%$ sample's conflict outcome by ACLED event type into \textbf{Riots/VAC} (13.1\% of all matched events) and \textbf{Battles/Explosions} (3.2\% of all matched events), and re-estimate the IV specification for each category. Table~\ref{tab:eventtype} reports the results.
 
 \begin{table}[H]
 \centering
@@ -262,7 +262,7 @@ The negative effect on political violence identified in Table~\ref{tab:active} i
 \subsection{A finer decomposition: literal ACLED categories}
 \label{sec:fourway}
 
-The \emph{Riots/VAC} category in Table~\ref{tab:eventtype} is a composite of two ACLED event types, \emph{Riots} and \emph{Violence against civilians}; it does not include ACLED's \emph{Protests} category, the single largest event type in the matched data (80.7\% of all matched events) and the one most directly tied to planned, public assembly. If haze suppresses conflict by disrupting public assembly, this category should show the clearest negative effect of all. This section re-estimates the IV specification separately for four literal, non-overlapping ACLED categories: \emph{Protests}, \emph{Riots}, \emph{Violence against civilians}, and \emph{Strategic developments} (the last included as an additional placebo-style category, since strategic developments, e.g. arrests, recruitment, and looting, do not require public assembly and would not be expected to respond if haze worked by disrupting public assembly). Table~\ref{tab:fourway} reports both the partially-instrumented specification (matching Table~\ref{tab:eventtype}) and the fully-instrumented specification of Appendix Section~\ref{sec:fulliv}.
+The \emph{Riots/VAC} category in Table~\ref{tab:eventtype} is a composite of two ACLED event types, \emph{Riots} and \emph{Violence against civilians}; it does not include ACLED's \emph{Protests} category, the single largest event type in the matched data (80.8\% of all matched events) and the one most directly tied to planned, public assembly. If haze suppresses conflict by disrupting public assembly, this category should show the clearest negative effect of all. This section re-estimates the IV specification separately for four literal, non-overlapping ACLED categories: \emph{Protests}, \emph{Riots}, \emph{Violence against civilians}, and \emph{Strategic developments} (the last included as an additional placebo-style category, since strategic developments, e.g. arrests, recruitment, and looting, do not require public assembly and would not be expected to respond if haze worked by disrupting public assembly). Table~\ref{tab:fourway} reports both the partially-instrumented specification (matching Table~\ref{tab:eventtype}) and the fully-instrumented specification of Appendix Section~\ref{sec:fulliv}.
 
 \begin{table}[H]
 \centering
@@ -391,7 +391,7 @@ pv\_events (political violence) & 0.062 & 0.406 & 95.8\% & 55{,}875 \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/conflict_events_map.png}
-\caption{\emph{All} ACLED conflict events recorded in Indonesia, February 2015--June 2025 ($n=21{,}653$). The map shows every recorded event; the district-month panel uses the 98.6\% (21{,}393) \emph{matched} to a GADM Level-2 district (Section~\ref{sec:data}).}
+\caption{\emph{All} ACLED conflict events recorded in Indonesia, February 2015--June 2025 ($n=21{,}653$). The map shows every recorded event; the district-month panel uses the 98.6\% (21{,}347) \emph{matched} to a GADM Level-2 district (Section~\ref{sec:data}).}
 \label{fig:conflictmap}
 \end{figure}
 
